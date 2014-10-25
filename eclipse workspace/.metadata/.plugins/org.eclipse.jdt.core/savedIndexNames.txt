@@ -1,2 +1,0 @@
-INDEX VERSION 1.127+C:\Users\Patrick\Desktop\School Stuff\CSC 440 Group Project\clientserverchat\eclipse workspace\.metadata\.plugins\org.eclipse.jdt.core
-1610280323.index
