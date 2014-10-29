@@ -18,7 +18,6 @@ public class Client extends Thread {
 	private ObjectOutputStream outputStream;
 	private boolean clientIsRunning = true;
 	
-	/* Default constructor. Prevents init without necessary data. */
 	public Client(String address, int port, String username) {
 		this.address = address;
 		this.port = port;
