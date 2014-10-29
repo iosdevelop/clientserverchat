@@ -43,7 +43,6 @@ public class Client extends Thread {
 		
 	}
 	
-	/* Constructor with an output object. */
 	public Client(String address, int port, String username, Output output) {
 		
 		this.address = address;
@@ -53,7 +52,6 @@ public class Client extends Thread {
 	
 	}
 	
-	/* Connect to a specified server. */
 	public synchronized void connect() throws UnknownHostException, IOException {
 		
 		output.display("Connecting to " + address + 
@@ -67,7 +65,6 @@ public class Client extends Thread {
 		
 	}
 	
-	/* Disconnect from the current server. */
 	public synchronized void disconnect() throws IOException {
 		
 		if (clientIsRunning) {
@@ -127,13 +124,7 @@ public class Client extends Thread {
 		
 	}
 	
-	/* Wrapper for outputStream.writeObject(). */
 	public synchronized void sendMessage(Message message) throws IOException {
 		outputStream.writeObject(message);
-	}
-	
-	/* Getter for the username. */
-	public synchronized String username() {
-		return username;
 	}
 }

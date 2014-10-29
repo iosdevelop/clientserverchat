@@ -131,9 +131,4 @@ public class Client extends Thread {
 	public synchronized void sendMessage(Message message) throws IOException {
 		outputStream.writeObject(message);
 	}
-	
-	/* Getter for the username. */
-	public synchronized String username() {
-		return username;
-	}
 }

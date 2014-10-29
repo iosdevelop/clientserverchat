@@ -132,7 +132,6 @@ public class Client extends Thread {
 		outputStream.writeObject(message);
 	}
 	
-	/* Getter for the username. */
 	public synchronized String username() {
 		return username;
 	}
