@@ -42,3 +42,53 @@ user global configuration and to define the default location to store repositori
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2014-10-29 01:53:49.099 -----------------------------------------------
+eclipse.buildId=4.4.0.I20140606-1215
+java.version=1.7.0_45
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.standard.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.standard.product
+
+!ENTRY org.eclipse.jdt.core 4 0 2014-10-29 01:57:07.391
+!MESSAGE Invalid ZIP archive: C:\Users\Patrick\Dropbox\CSC 440 Team Project\eclipse-standard-luna-R-win32-x86_64\eclipse\plugins\org.eclipse.osgi_3.10.0.v20140606-1445.jar
+
+!ENTRY org.eclipse.jdt.core 4 0 2014-10-29 01:57:07.570
+!MESSAGE Invalid ZIP archive: C:\Users\Patrick\Dropbox\CSC 440 Team Project\eclipse-standard-luna-R-win32-x86_64\eclipse\plugins\org.eclipse.core.commands_3.6.100.v20140528-1422.jar
+
+!ENTRY org.eclipse.jdt.core 4 0 2014-10-29 01:57:07.576
+!MESSAGE Invalid ZIP archive: C:\Users\Patrick\Dropbox\CSC 440 Team Project\eclipse-standard-luna-R-win32-x86_64\eclipse\plugins\org.eclipse.equinox.common_3.6.200.v20130402-1505.jar
+
+!ENTRY org.eclipse.jdt.core 4 0 2014-10-29 01:57:07.584
+!MESSAGE Invalid ZIP archive: C:\Users\Patrick\Dropbox\CSC 440 Team Project\eclipse-standard-luna-R-win32-x86_64\eclipse\plugins\org.eclipse.equinox.registry_3.5.400.v20140428-1507.jar
+
+!ENTRY org.eclipse.jdt.core 4 0 2014-10-29 01:57:07.591
+!MESSAGE Invalid ZIP archive: C:\Users\Patrick\Dropbox\CSC 440 Team Project\eclipse-standard-luna-R-win32-x86_64\eclipse\plugins\org.eclipse.core.runtime_3.10.0.v20140318-2214.jar
+
+!ENTRY org.eclipse.jdt.core 4 0 2014-10-29 01:57:07.598
+!MESSAGE Invalid ZIP archive: C:\Users\Patrick\Dropbox\CSC 440 Team Project\eclipse-standard-luna-R-win32-x86_64\eclipse\plugins\org.eclipse.text_3.5.300.v20130515-1451.jar
+
+!ENTRY org.eclipse.jdt.core 4 0 2014-10-29 01:57:07.603
+!MESSAGE Invalid ZIP archive: C:\Users\Patrick\Dropbox\CSC 440 Team Project\eclipse-standard-luna-R-win32-x86_64\eclipse\plugins\org.eclipse.swt.win32.win32.x86_64_3.103.0.v20140605-2012.jar
+
+!ENTRY org.eclipse.jdt.core 4 0 2014-10-29 01:57:07.611
+!MESSAGE Invalid ZIP archive: C:\Users\Patrick\Dropbox\CSC 440 Team Project\eclipse-standard-luna-R-win32-x86_64\eclipse\plugins\org.eclipse.jface_3.10.0.v20140604-0740.jar
+
+!ENTRY org.eclipse.jdt.core 4 0 2014-10-29 01:57:07.618
+!MESSAGE Invalid ZIP archive: C:\Users\Patrick\Dropbox\CSC 440 Team Project\eclipse-standard-luna-R-win32-x86_64\eclipse\plugins\org.eclipse.jface.text_3.9.0.v20140521-1657.jar
+
+!ENTRY org.eclipse.jdt.core 4 0 2014-10-29 01:57:07.626
+!MESSAGE Invalid ZIP archive: C:\Users\Patrick\Dropbox\CSC 440 Team Project\eclipse-standard-luna-R-win32-x86_64\eclipse\plugins\org.eclipse.ui.workbench_3.106.0.v20140530-0732.jar
+
+!ENTRY org.eclipse.jdt.core 4 0 2014-10-29 01:57:07.633
+!MESSAGE Invalid ZIP archive: C:\Users\Patrick\Dropbox\CSC 440 Team Project\eclipse-standard-luna-R-win32-x86_64\eclipse\plugins\com.ibm.icu_52.1.0.v201404241930.jar
+
+!ENTRY org.eclipse.jdt.core 4 0 2014-10-29 01:57:07.639
+!MESSAGE Invalid ZIP archive: C:\Users\Patrick\Dropbox\CSC 440 Team Project\eclipse-standard-luna-R-win32-x86_64\eclipse\plugins\org.eclipse.ui.forms_3.6.100.v20140422-1825.jar
+
+!ENTRY org.eclipse.egit.ui 2 0 2014-10-29 01:57:12.514
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\The Adaminator'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
