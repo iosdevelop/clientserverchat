@@ -75,41 +75,15 @@ public class Client extends Thread {
 			socket.close();
 			output.display("Disconnected.");
 			
-		} else {
-			System.out.println("You're not even connected!");
 		}
 		
 	}
 	
-	/* Run the client after initialization. Basically wait for messages and
-	   act upon them.
-	*/
 	public void run() {
-		
-		try {
-			output.display("Waiting for messages...");
-			clientIsRunning = true;
-			
-			while (clientIsRunning && !socket.isClosed()) {
-				
-				Message message = (Message) inputStream.readObject();
-				
-				/* All cases except for login just display it. */
-				switch(message.type()) {
-					case Message.LOGIN:
-						username = message.name();
-						output.display(message);
-						break;
-					default:
-						output.display(message);
-						break;
-				}
-			}
-		} catch (Exception e) {}
 		
 	}
 	
-	public synchronized void sendMessage(Message message) throws IOException {
-		outputStream.writeObject(message);
+	public synchronized void sendMessage(Message message) {
+		
 	}
 }

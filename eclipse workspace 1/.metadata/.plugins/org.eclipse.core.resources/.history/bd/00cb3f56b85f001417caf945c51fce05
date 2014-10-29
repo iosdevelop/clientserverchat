@@ -81,9 +81,6 @@ public class Client extends Thread {
 		
 	}
 	
-	/* Run the client after initialization. Basically wait for messages and
-	   act upon them.
-	*/
 	public void run() {
 		
 		try {
@@ -100,10 +97,8 @@ public class Client extends Thread {
 						username = message.name();
 						output.display(message);
 						break;
-					default:
-						output.display(message);
-						break;
 				}
+				
 			}
 		} catch (Exception e) {}
 		
