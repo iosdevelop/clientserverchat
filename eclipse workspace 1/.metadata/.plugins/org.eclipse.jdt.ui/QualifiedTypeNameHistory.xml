@@ -4,4 +4,6 @@
 <fullyQualifiedTypeName name="java.net.UnknownHostException"/>
 <fullyQualifiedTypeName name="java.io.IOException"/>
 <fullyQualifiedTypeName name="java.io.EOFException"/>
+<fullyQualifiedTypeName name="shared.Message"/>
+<fullyQualifiedTypeName name="java.util.Scanner"/>
 </qualifiedTypeNameHistroy>

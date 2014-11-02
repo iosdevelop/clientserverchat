@@ -1,0 +1,26 @@
+package client;
+
+import java.util.Scanner;
+
+import shared.Message;
+
+/* CLI Driver is a simple little class that will just allow us to parse output
+ * and view what input/output will look like before we attempt a GUI. */
+
+class CLI_Driver {
+	public static void display(Message msg) {
+		int type = msg.type();
+		String text = msg.data();
+		System.out.println(type + ": " + text);
+	}
+
+	public static Message getMessage() {
+		Scanner in = new Scanner(System.in);
+		String text = null;
+		do {
+			text = in.nextLine();
+		} while (text.isEmpty());
+		in.close();
+		return new Message(Message.SAY, text);
+	}
+}

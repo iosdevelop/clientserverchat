@@ -6,6 +6,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Scanner;
 
 import shared.Message;
 
@@ -95,35 +96,42 @@ public class Client extends Thread {
 			output.display("Waiting for messages...");
 			clientIsRunning = true;
 			
-			while (clientIsRunning && !socket.isClosed()) {
+			while (clientIsRunning /*&& !socket.isClosed()*/) {
 				
-				Message message = (Message) inputStream.readObject();
+				//Message message = (Message) inputStream.readObject();
+				
+				Message message = CLI_Driver.getText(); // Temporary.
 				
 				/* All cases except for login just display it. */
 				switch(message.type()) {
 					case Message.LOGIN:
 						username = message.name();
-						output.display(message);
+						//output.display(message);
+						
+						CLI_Driver.display(message);
+						
 						break;
 					default:
-						output.display(message);
+						//output.display(message);
+						CLI_Driver.display(message);
 						break;
 				}
 			}
-			clientIsRunning = false;
-			
+			clientIsRunning = false;} finally{};
+		
+			/* Breaks test run with CLI_Driver
 		} catch (EOFException e) {
 			clientIsRunning = false;
 			output.display("Disconnected.");
 		} catch (ClassNotFoundException | IOException e) {
 			clientIsRunning = false;
 			output.display(e.getMessage());
-		} catch (Exception e) { /* Purely for safety reasons. */
+		} catch (Exception e) {
 			clientIsRunning = false;
 			System.err.println("Fatal Error. Exiting...");
 			e.printStackTrace();
 			System.exit(-1);
-		}
+		}*/
 		
 	}
 	
