@@ -98,6 +98,7 @@ public class Client extends Thread {
 			
 			while (clientIsRunning /*&& !socket.isClosed()*/) {
 				
+				/* Commented out for now. It's trying to read from a socket that isn't working yet. */
 				//Message message = (Message) inputStream.readObject();
 				
 				Message message = CLI_Driver.getText(); // Temporary.
@@ -106,33 +107,28 @@ public class Client extends Thread {
 				switch(message.type()) {
 					case Message.LOGIN:
 						username = message.name();
-						//output.display(message);
-						
-						CLI_Driver.display(message);
-						
+						output.display(message);
 						break;
 					default:
-						//output.display(message);
-						CLI_Driver.display(message);
+						output.display(message);
 						break;
 				}
 			}
-			clientIsRunning = false;} finally{};
+			clientIsRunning = false;
 		
-			/* Breaks test run with CLI_Driver
-		} catch (EOFException e) {
-			clientIsRunning = false;
-			output.display("Disconnected.");
-		} catch (ClassNotFoundException | IOException e) {
-			clientIsRunning = false;
-			output.display(e.getMessage());
+			/* Breaks test run with CLI_Driver */
+		//} catch (EOFException e) {
+		//	clientIsRunning = false;
+		//	output.display("Disconnected.");
+		//} catch (ClassNotFoundException | IOException e) {
+		//	clientIsRunning = false;
+		//	output.display(e.getMessage());
 		} catch (Exception e) {
 			clientIsRunning = false;
 			System.err.println("Fatal Error. Exiting...");
 			e.printStackTrace();
 			System.exit(-1);
-		}*/
-		
+		}
 	}
 	
 	/* Wrapper for outputStream.writeObject(). */
