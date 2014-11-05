@@ -33,7 +33,7 @@ public class GUI_Application_Main {
 	 */
 	public GUI_Application_Main() {
 		initialize();
-		Client cli = new Client("127.0.0.1", 200, "Adam");
+		Client cli = new Client("127.0.0.1", 200, null);
 		try {
 			cli.connect();
 		} catch (UnknownHostException e) {
