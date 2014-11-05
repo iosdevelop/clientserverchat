@@ -535,8 +535,7 @@ public class Server extends Thread {
 			room.remove_client(userToKick);
 			
 		} else {
-			Message errorMsg = new Message(Message.ERROR, 
-				"Error: You are not the owner of the room. Nice try.");
+			Message errorMsg = new Message(Message.ERROR, "You are not the owner of the room.");
 			client.send_message(errorMsg);
 		}
 
@@ -553,11 +552,9 @@ public class Server extends Thread {
 		
 	}
 	
-	
 	public synchronized void op(Client_Thread client, Message message) {
 		
 	}
-	
 	
 	public synchronized void rinfo(Client_Thread client, Message message) throws IOException {
 		// gets room information

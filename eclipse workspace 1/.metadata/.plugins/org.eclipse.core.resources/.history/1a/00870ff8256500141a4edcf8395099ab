@@ -553,11 +553,9 @@ public class Server extends Thread {
 		
 	}
 	
-	
 	public synchronized void op(Client_Thread client, Message message) {
 		
 	}
-	
 	
 	public synchronized void rinfo(Client_Thread client, Message message) throws IOException {
 		// gets room information

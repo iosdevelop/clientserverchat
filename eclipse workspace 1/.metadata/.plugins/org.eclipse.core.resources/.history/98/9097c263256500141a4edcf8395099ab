@@ -486,59 +486,46 @@ public class Server extends Thread {
 		}
 		
 		
-		// look for the room
-		int roomIndex = find_room(message.name());
-		if (roomIndex != -1) {
-			Message errorMsg = new Message(Message.ERROR, 
-				"Error: Room not found.", message.name());
-			client.send_message(errorMsg);
-			return;
-		}
-			
-		// get an object for it
-		Chat_Room room = chat_rooms.get(roomIndex);
-		
-		
-		// make sure i have a username in message.data
-		if (!message.data().equals(new String(""))) {
-			Message errorMsg = new Message(Message.ERROR, 
-				"Error: Invalid username.");
-			client.send_message(errorMsg);
-			return;
-		}
-		
-		
-		// i need to make sure the user exists in the room
-		int userIndex = room.find_client(message.data());
-		// if i found them
-		if (userIndex != -1) {
-			Message errorMsg = new Message(Message.ERROR, 
-				"Error: User not in room.");
-			client.send_message(errorMsg);
-		}
-		
-		
-		// get the client user to kick out of the room
-		Client_Thread userToKick = room.clients().get(userIndex);
-		
-		
-		// make sure the requesting client has permission to kick users out of the room
-		if (client.username().equals(room.owner())) {
-			
-			// i need to tell everybody in the room that a user is being kicked
-			ArrayList<Client_Thread> roomClients = room.clients();
-			Message kickMsg = new Message(Message.KICK, message.data(), message.name());
-			for (int i = 0; i < roomClients.size(); i++) {
-				roomClients.get(i).send_message(kickMsg);
+			// look for the room
+			int roomIndex = find_room(message.name());
+			// if i found the rom
+			if (roomIndex != -1) {
+				Message errorMsg = new Message(Message.ERROR, "Room not found.", message.name());
+				client.send_message(errorMsg);
 			}
-			// and remove that user
-			room.remove_client(userToKick);
-			
-		} else {
-			Message errorMsg = new Message(Message.ERROR, 
-				"Error: You are not the owner of the room. Nice try.");
-			client.send_message(errorMsg);
-		}
+				// get an object for it
+				Chat_Room room = chat_rooms.get(roomIndex);
+				// make sure i have a username in message.data
+				if (!message.data().equals(new String(""))) {
+					// i need to make sure the user exists in the room
+					int userIndex = room.find_client(message.data());
+					// if i found them
+					if (userIndex != -1) {
+						// get the client user to kick out of the room
+						Client_Thread userToKick = room.clients().get(userIndex);
+						// make sure the requesting client has permission to kick users out of the room
+						if (client.username().equals(room.owner())) {
+							// i need to tell everybody in the room that a user is being kicked
+							ArrayList<Client_Thread> roomClients = room.clients();
+							Message kickMsg = new Message(Message.KICK, message.data(), message.name());
+							for (int i = 0; i < roomClients.size(); i++) {
+								roomClients.get(i).send_message(kickMsg);
+							}
+							// and remove that user
+							room.remove_client(userToKick);
+						} else {
+							Message errorMsg = new Message(Message.ERROR, "You are not the owner of the room.");
+							client.send_message(errorMsg);
+						}
+					} else {
+						Message errorMsg = new Message(Message.ERROR, "User not in room.");
+						client.send_message(errorMsg);
+					}
+				} else {
+					Message errorMsg = new Message(Message.ERROR, "Invalid username.");
+					client.send_message(errorMsg);
+				}
+
 
 	}
 	
@@ -553,11 +540,9 @@ public class Server extends Thread {
 		
 	}
 	
-	
 	public synchronized void op(Client_Thread client, Message message) {
 		
 	}
-	
 	
 	public synchronized void rinfo(Client_Thread client, Message message) throws IOException {
 		// gets room information

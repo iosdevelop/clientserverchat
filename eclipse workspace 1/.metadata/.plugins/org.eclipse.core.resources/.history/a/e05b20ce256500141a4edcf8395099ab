@@ -520,11 +520,8 @@ public class Server extends Thread {
 		
 		// get the client user to kick out of the room
 		Client_Thread userToKick = room.clients().get(userIndex);
-		
-		
 		// make sure the requesting client has permission to kick users out of the room
 		if (client.username().equals(room.owner())) {
-			
 			// i need to tell everybody in the room that a user is being kicked
 			ArrayList<Client_Thread> roomClients = room.clients();
 			Message kickMsg = new Message(Message.KICK, message.data(), message.name());
@@ -533,10 +530,8 @@ public class Server extends Thread {
 			}
 			// and remove that user
 			room.remove_client(userToKick);
-			
 		} else {
-			Message errorMsg = new Message(Message.ERROR, 
-				"Error: You are not the owner of the room. Nice try.");
+			Message errorMsg = new Message(Message.ERROR, "You are not the owner of the room.");
 			client.send_message(errorMsg);
 		}
 
@@ -553,11 +548,9 @@ public class Server extends Thread {
 		
 	}
 	
-	
 	public synchronized void op(Client_Thread client, Message message) {
 		
 	}
-	
 	
 	public synchronized void rinfo(Client_Thread client, Message message) throws IOException {
 		// gets room information

@@ -479,67 +479,50 @@ public class Server extends Thread {
 		
 		// make sure the room name exists
 		if (!message.name().equals(new String(""))) {
-			Message errorMsg = new Message(Message.ERROR,
-				"Error: Invalid room name.");
-			client.send_message(errorMsg);
-			return;
-		}
-		
-		
-		// look for the room
-		int roomIndex = find_room(message.name());
-		if (roomIndex != -1) {
-			Message errorMsg = new Message(Message.ERROR, 
-				"Error: Room not found.", message.name());
-			client.send_message(errorMsg);
-			return;
-		}
-			
-		// get an object for it
-		Chat_Room room = chat_rooms.get(roomIndex);
-		
-		
-		// make sure i have a username in message.data
-		if (!message.data().equals(new String(""))) {
-			Message errorMsg = new Message(Message.ERROR, 
-				"Error: Invalid username.");
-			client.send_message(errorMsg);
-			return;
-		}
-		
-		
-		// i need to make sure the user exists in the room
-		int userIndex = room.find_client(message.data());
-		// if i found them
-		if (userIndex != -1) {
-			Message errorMsg = new Message(Message.ERROR, 
-				"Error: User not in room.");
-			client.send_message(errorMsg);
-		}
-		
-		
-		// get the client user to kick out of the room
-		Client_Thread userToKick = room.clients().get(userIndex);
-		
-		
-		// make sure the requesting client has permission to kick users out of the room
-		if (client.username().equals(room.owner())) {
-			
-			// i need to tell everybody in the room that a user is being kicked
-			ArrayList<Client_Thread> roomClients = room.clients();
-			Message kickMsg = new Message(Message.KICK, message.data(), message.name());
-			for (int i = 0; i < roomClients.size(); i++) {
-				roomClients.get(i).send_message(kickMsg);
+			// look for the room
+			int roomIndex = find_room(message.name());
+			// if i found the rom
+			if (roomIndex != -1) {
+				// get an object for it
+				Chat_Room room = chat_rooms.get(roomIndex);
+				// make sure i have a username in message.data
+				if (!message.data().equals(new String(""))) {
+					// i need to make sure the user exists in the room
+					int userIndex = room.find_client(message.data());
+					// if i found them
+					if (userIndex != -1) {
+						// get the client user to kick out of the room
+						Client_Thread userToKick = room.clients().get(userIndex);
+						// make sure the requesting client has permission to kick users out of the room
+						if (client.username().equals(room.owner())) {
+							// i need to tell everybody in the room that a user is being kicked
+							ArrayList<Client_Thread> roomClients = room.clients();
+							Message kickMsg = new Message(Message.KICK, message.data(), message.name());
+							for (int i = 0; i < roomClients.size(); i++) {
+								roomClients.get(i).send_message(kickMsg);
+							}
+							// and remove that user
+							room.remove_client(userToKick);
+						} else {
+							Message errorMsg = new Message(Message.ERROR, "You are not the owner of the room.");
+							client.send_message(errorMsg);
+						}
+					} else {
+						Message errorMsg = new Message(Message.ERROR, "User not in room.");
+						client.send_message(errorMsg);
+					}
+				} else {
+					Message errorMsg = new Message(Message.ERROR, "Invalid username.");
+					client.send_message(errorMsg);
+				}
+			} else {
+				Message errorMsg = new Message(Message.ERROR, "Room not found.", message.name());
+				client.send_message(errorMsg);
 			}
-			// and remove that user
-			room.remove_client(userToKick);
-			
 		} else {
-			Message errorMsg = new Message(Message.ERROR, 
-				"Error: You are not the owner of the room. Nice try.");
+			Message errorMsg = new Message(Message.ERROR, "Invalid room name.");
 			client.send_message(errorMsg);
 		}
-
 	}
 	
 	public synchronized void ban(Client_Thread client, Message message) {
@@ -553,11 +536,9 @@ public class Server extends Thread {
 		
 	}
 	
-	
 	public synchronized void op(Client_Thread client, Message message) {
 		
 	}
-	
 	
 	public synchronized void rinfo(Client_Thread client, Message message) throws IOException {
 		// gets room information
@@ -622,8 +603,7 @@ public class Server extends Thread {
 		
 		/* Check validity of the room name. */
 		if (roomName.equals(new String(""))) {
-			Message errorMsg = new Message(Message.ERROR, 
-				"Error: You need to enter a room name.");
+			Message errorMsg = new Message(Message.ERROR, "Error: Null room!");
 			client.send_message(errorMsg);
 			return;
 		}
@@ -638,45 +618,38 @@ public class Server extends Thread {
 			return;
 		}
 				
-		/* Found it. Now try to actually leave it. */
-		Chat_Room chatRoom = chat_rooms.get(roomIndex);
-		if (chatRoom.remove_client(client)) {
-			Message errorMsg = new Message(Message.ERROR, 
-				"Error: Failed to part " + roomName
-				+ ". Were you in that room?");
-			client.send_message(errorMsg);
-			return;
-		}
-		
-		// i should tell the other users in the room that they've parted
-		// get the list of clients in the room
-		ArrayList<Client_Thread> roomClients = chatRoom.clients();
-		Message partMsg = new Message(Message.PART,
-			client.username(), chatRoom.name());
-		for (int i = 0; i < roomClients.size(); i++) {
-			// make sure i don't try to tell the client
-			Client_Thread roomClient = roomClients.get(i);
-			if (!roomClient.username().equals(client.username())) {
-				roomClient.send_message(partMsg);
-			}
-		}
-		
-		// if the room is now empty then i need to get rid of it
-		roomClients = chatRoom.clients();
-		if (roomClients.size() == 0) {
-			chat_rooms.remove(roomIndex);
-		}
-		
-		try {
-			// tell the user that they've parted the room
-			Message successMsg = new Message(Message.PART,
-				client.username(), roomName);
-			client.send_message(successMsg);
-		} catch (IOException ex) {
-			// wasn't able to tell the user they parted. 
-			// they've probably disconnected from the server.
-			// not a big deal.
-		}
+			Chat_Room chatRoom = chat_rooms.get(roomIndex);
+				if (chatRoom.remove_client(client)) {
+					// i should tell the other users in the room that they've parted
+					// get the list of clients in the room
+					ArrayList<Client_Thread> roomClients = chatRoom.clients();
+					Message partMsg = new Message(Message.PART, client.username(), chatRoom.name());
+					for (int i = 0; i < roomClients.size(); i++) {
+						// make sure i don't try to tell the client
+						Client_Thread roomClient = roomClients.get(i);
+						if (!roomClient.username().equals(client.username())) {
+							roomClient.send_message(partMsg);
+						}
+					}
+					// if the room is now empty then i need to get rid of it
+					roomClients = chatRoom.clients();
+					if (roomClients.size() == 0) {
+						chat_rooms.remove(roomIndex);
+					}
+					try {
+						// tell the user that they've parted the room
+						Message successMsg = new Message(Message.PART, client.username(), roomName);
+						client.send_message(successMsg);
+					} catch (IOException ex) {
+						// wasn't able to tell the user they parted. they've probably disconnected from the server.
+						// not a big deal.
+					}
+				} else {
+					Message errorMsg = new Message(Message.ERROR, "Failed to part " + roomName + ". Were you in that room?");
+					client.send_message(errorMsg);
+				}
+
+
 	}
 	
 	// creates a chat room object on the array list, and returns it
