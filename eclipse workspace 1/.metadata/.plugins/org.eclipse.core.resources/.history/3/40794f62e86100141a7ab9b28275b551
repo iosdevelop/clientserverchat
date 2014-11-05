@@ -1,0 +1,5 @@
+/* CLI Driver is a simple little class that will just allow us to parse output
+ * and view what input/output will look like before we attempt a GUI. */
+class CLI_Driver {
+	
+}

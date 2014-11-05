@@ -1,0 +1,68 @@
+package server;
+
+import java.net.ServerSocket;
+
+public class Server extends Thread {
+
+	// ----- STUFF THAT'S NEEDED TO ENFORCE SINGlETON -----
+	// static variable to hold singleton instance of this object
+	private static Server SERVER_INSTANCE = new Server();
+	
+	// private constructor to prevent object creation
+	private Server() {}
+	
+	// static method to return object instance
+	public static Server getInstance() {
+		return SERVER_INSTANCE;
+	}
+	
+	// ----- STUFF THAT'S USED TO DO THE SERVER WORK -----
+	
+	/* Class level variables set before the server starts running. */
+	private int port = 0;
+	private int maxClients = 0;
+	private int clientCount = 0;
+	
+	/* Class level variables used while server is running. */
+	private ServerSocket serverSocket = null;
+	private Client_Thread clients[];
+	private boolean running = false;
+	
+	
+	/* Getters and setters. */
+	public synchronized void port(int port) throws Server_Exception {
+		if (!running)
+			this.port = port;
+		else
+			throw new Server_Exception("Error: Cannot set port."
+					+ " Try halting the server first.");
+	}
+	
+	public synchronized int port() {
+		return port;
+	}
+	
+	
+	public synchronized void maxClients(int maxClients) throws Server_Exception {
+		if (!running) {
+			this.maxClients = maxClients;
+		} else {
+			throw new Server_Exception("Server is running. Cannot set maxClients at this time. Try halting the server first.");
+		}
+	}
+	
+	public synchronized int maxClients() {
+		return maxClients;
+	}
+	
+	public synchronized boolean running() {
+		return running;
+	}
+	
+	
+	// method that's run when thread is started
+	public void run() {
+		
+	}
+	
+}

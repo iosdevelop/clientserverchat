@@ -1,6 +1,9 @@
 package client;
 
 import java.awt.EventQueue;
+import java.io.IOException;
+import java.net.ConnectException;
+import java.net.UnknownHostException;
 
 import javax.swing.JFrame;
 
@@ -12,6 +15,7 @@ public class GUI_Application_Main {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -29,13 +33,23 @@ public class GUI_Application_Main {
 	 */
 	public GUI_Application_Main() {
 		initialize();
+		Client cli = new Client("127.0.0.1", 7, null);
+		try {
+			cli.connect();
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.println("Connect exception");
+			e.printStackTrace();
+		}
+		cli.run();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
+		frame = new JFrame("Client");
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}

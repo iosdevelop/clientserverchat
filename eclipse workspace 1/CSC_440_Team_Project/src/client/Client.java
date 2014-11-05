@@ -6,6 +6,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Scanner;
 
 import shared.Message;
 
@@ -95,9 +96,12 @@ public class Client extends Thread {
 			output.display("Waiting for messages...");
 			clientIsRunning = true;
 			
-			while (clientIsRunning && !socket.isClosed()) {
+			while (clientIsRunning /*&& !socket.isClosed()*/) {
 				
-				Message message = (Message) inputStream.readObject();
+				/* Commented out for now. It's trying to read from a socket that isn't working yet. */
+				//Message message = (Message) inputStream.readObject();
+				
+				Message message = CLI_Driver.getText(); // Temporary.
 				
 				/* All cases except for login just display it. */
 				switch(message.type()) {
@@ -111,20 +115,20 @@ public class Client extends Thread {
 				}
 			}
 			clientIsRunning = false;
-			
-		} catch (EOFException e) {
-			clientIsRunning = false;
-			output.display("Disconnected.");
-		} catch (ClassNotFoundException | IOException e) {
-			clientIsRunning = false;
-			output.display(e.getMessage());
-		} catch (Exception e) { /* Purely for safety reasons. */
+		
+			/* Breaks test run with CLI_Driver */
+		//} catch (EOFException e) {
+		//	clientIsRunning = false;
+		//	output.display("Disconnected.");
+		//} catch (ClassNotFoundException | IOException e) {
+		//	clientIsRunning = false;
+		//	output.display(e.getMessage());
+		} catch (Exception e) {
 			clientIsRunning = false;
 			System.err.println("Fatal Error. Exiting...");
 			e.printStackTrace();
 			System.exit(-1);
 		}
-		
 	}
 	
 	/* Wrapper for outputStream.writeObject(). */
