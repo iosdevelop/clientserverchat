@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move element &apos;CLI_Driver.java&apos; to &apos;CSC_440_Team_Project/src/shared&apos;&#x0D;&#x0A;- Original project: &apos;CSC_440_Team_Project&apos;&#x0D;&#x0A;- Destination element: &apos;CSC_440_Team_Project/src/shared&apos;&#x0D;&#x0A;- Original element: &apos;client.CLI_Driver.java&apos;&#x0D;&#x0A;- Update references to refactored element" description="Move compilation unit" destination="/src&lt;shared" element1="/src&lt;client{CLI_Driver.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" patterns="*" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1415209535124" units="1" version="1.0"/>
+</session>

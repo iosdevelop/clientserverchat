@@ -38,6 +38,16 @@ public class GUI_Application_Main {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		/* TESTING */
+		Server SERVER_INSTANCE = Server.getInstance();
+		try {
+			SERVER_INSTANCE.setup(200, 5);
+			SERVER_INSTANCE.run();
+		} catch (Server_Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
