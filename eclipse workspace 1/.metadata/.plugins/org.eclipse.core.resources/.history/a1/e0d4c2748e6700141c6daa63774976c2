@@ -1,0 +1,122 @@
+package server;
+
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.layout.FormLayout;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+
+public class GUI_Application_Main {
+
+	protected Shell shell;
+	private Text textPort;
+	private Text textMaxUsers;
+	
+	private String usersFile;
+	private String roomsFile;
+	
+	private static Server the_server;
+
+	/**
+	 * Launch the application.
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		try {
+			
+			// do initialization stuff here
+			the_server = Server.getInstance();
+			
+			
+			GUI_Application_Main window = new GUI_Application_Main();
+			window.open();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Open the window.
+	 */
+	public void open() {
+		Display display = Display.getDefault();
+		createContents();
+		shell.open();
+		shell.layout();
+		while (!shell.isDisposed()) {
+			if (!display.readAndDispatch()) {
+				display.sleep();
+			}
+		}
+	}
+
+	/**
+	 * Create contents of the window.
+	 */
+	protected void createContents() {
+		shell = new Shell();
+		shell.setSize(450, 300);
+		shell.setText("SWT Application");
+		shell.setLayout(new GridLayout(3, false));
+		
+		Label lblPort = new Label(shell, SWT.NONE);
+		lblPort.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblPort.setText("Port:");
+		
+		textPort = new Text(shell, SWT.BORDER);
+		textPort.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1));
+		
+		Button btnSetUsersFile = new Button(shell, SWT.NONE);
+		btnSetUsersFile.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				// called when set user file is clicked
+			}
+		});
+		btnSetUsersFile.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+		btnSetUsersFile.setText("Set Users File");
+		
+		Label lblMaxUsers = new Label(shell, SWT.NONE);
+		lblMaxUsers.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblMaxUsers.setText("Max Users:");
+		
+		textMaxUsers = new Text(shell, SWT.BORDER);
+		textMaxUsers.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1));
+		
+		Button btnSetRoomsFile = new Button(shell, SWT.NONE);
+		btnSetRoomsFile.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				// called when set rooms file is clicked
+			}
+		});
+		btnSetRoomsFile.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+		btnSetRoomsFile.setText("Set Rooms File");
+		new Label(shell, SWT.NONE);
+		new Label(shell, SWT.NONE);
+		new Label(shell, SWT.NONE);
+		new Label(shell, SWT.NONE);
+		new Label(shell, SWT.NONE);
+		
+		Button btnStartStop = new Button(shell, SWT.NONE);
+		btnStartStop.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				// called when start/stop is clicked.
+				// check the text on the button to determine what we're doing
+				// check to make sure we have all the needed information to start the server
+				// update the text on the button when we're done
+			}
+		});
+		btnStartStop.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+		btnStartStop.setText("Start");
+
+	}
+
+}
