@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-	<item value="C:\Users\The Adaminator\Dropbox\CSC 440 Team Project\eclipse-standard-luna-R-win32-x86_64\eclipse\plugins" key="org.eclipse.jdt.ui.lastextjar"/>
+	<item value="C:\Users\Patrick\Dropbox\CSC 440 Team Project\eclipse-standard-luna-R-win32-x86_64\eclipse\plugins" key="org.eclipse.jdt.ui.lastextjar"/>
 	<section name="org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart">
 		<item value="true" key="group_libraries"/>
 		<item value="false" key="linkWithEditor"/>
