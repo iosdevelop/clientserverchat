@@ -1,0 +1,106 @@
+package client;
+
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.custom.ScrolledComposite;
+
+public class Client_Control_GUI_composite extends Composite {
+	private Text textAddress;
+	private Text textPort;
+	private Text textUsername;
+	private Text textServerOutput;
+
+	/**
+	 * Create the composite.
+	 * @param parent
+	 * @param style
+	 */
+	public Client_Control_GUI_composite(Composite parent, int style) {
+		super(parent, style);
+		setLayout(new GridLayout(2, false));
+		
+		Label lblAddress = new Label(this, SWT.NONE);
+		lblAddress.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblAddress.setText("Address");
+		
+		textAddress = new Text(this, SWT.BORDER);
+		textAddress.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1));
+		
+		Label lblPort = new Label(this, SWT.NONE);
+		lblPort.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblPort.setText("Port");
+		
+		textPort = new Text(this, SWT.BORDER);
+		textPort.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1));
+		
+		Label lblUsername = new Label(this, SWT.NONE);
+		lblUsername.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblUsername.setText("Username");
+		
+		textUsername = new Text(this, SWT.BORDER);
+		textUsername.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1));
+		new Label(this, SWT.NONE);
+		
+		Button btnConnectToggle = new Button(this, SWT.NONE);
+		btnConnectToggle.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				// this is called when the connect/disconnect button is clicked.
+			}
+		});
+		GridData gd_btnConnectToggle = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+		gd_btnConnectToggle.widthHint = 77;
+		btnConnectToggle.setLayoutData(gd_btnConnectToggle);
+		btnConnectToggle.setText("Connect");
+		new Label(this, SWT.NONE);
+		new Label(this, SWT.NONE);
+		new Label(this, SWT.NONE);
+		new Label(this, SWT.NONE);
+		new Label(this, SWT.NONE);
+		new Label(this, SWT.NONE);
+		new Label(this, SWT.NONE);
+		new Label(this, SWT.NONE);
+		new Label(this, SWT.NONE);
+		new Label(this, SWT.NONE);
+		new Label(this, SWT.NONE);
+		new Label(this, SWT.NONE);
+		new Label(this, SWT.NONE);
+		new Label(this, SWT.NONE);
+		new Label(this, SWT.NONE);
+		new Label(this, SWT.NONE);
+		new Label(this, SWT.NONE);
+		new Label(this, SWT.NONE);
+		new Label(this, SWT.NONE);
+		new Label(this, SWT.NONE);
+		new Label(this, SWT.NONE);
+		new Label(this, SWT.NONE);
+		new Label(this, SWT.NONE);
+		new Label(this, SWT.NONE);
+		new Label(this, SWT.NONE);
+		new Label(this, SWT.NONE);
+		
+		ScrolledComposite scrolledComposite = new ScrolledComposite(this, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
+		GridData gd_scrolledComposite = new GridData(SWT.FILL, SWT.CENTER, false, false, 2, 1);
+		gd_scrolledComposite.heightHint = 122;
+		scrolledComposite.setLayoutData(gd_scrolledComposite);
+		scrolledComposite.setExpandHorizontal(true);
+		scrolledComposite.setExpandVertical(true);
+		
+		textServerOutput = new Text(scrolledComposite, SWT.BORDER | SWT.READ_ONLY | SWT.WRAP | SWT.V_SCROLL);
+		scrolledComposite.setContent(textServerOutput);
+		scrolledComposite.setMinSize(textServerOutput.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+
+	}
+
+	@Override
+	protected void checkSubclass() {
+		// Disable the check that prevents subclassing of SWT components
+	}
+}
