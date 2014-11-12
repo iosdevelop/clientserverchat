@@ -2,10 +2,13 @@ package client;
 
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.SWT;
 
 public class GUI_Application_Main {
 
-	protected Shell shell;
+	protected Shell shlSwtClient;
+	private Text txtIAmA;
 
 	/**
 	 * Launch the application.
@@ -26,9 +29,9 @@ public class GUI_Application_Main {
 	public void open() {
 		Display display = Display.getDefault();
 		createContents();
-		shell.open();
-		shell.layout();
-		while (!shell.isDisposed()) {
+		shlSwtClient.open();
+		shlSwtClient.layout();
+		while (!shlSwtClient.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
 			}
@@ -39,10 +42,14 @@ public class GUI_Application_Main {
 	 * Create contents of the window.
 	 */
 	protected void createContents() {
-		shell = new Shell();
-		shell.setSize(450, 300);
-		shell.setText("SWT Application");
+		shlSwtClient = new Shell();
+		shlSwtClient.setSize(450, 300);
+		shlSwtClient.setText("SWT Client");
+		shlSwtClient.setLayout(null);
+		
+		txtIAmA = new Text(shlSwtClient, SWT.BORDER);
+		txtIAmA.setText("i am a box");
+		txtIAmA.setBounds(63, 42, 76, 21);
 
 	}
-
 }
