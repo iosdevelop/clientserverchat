@@ -15,12 +15,10 @@ public class CLI_Driver {
 		int type = 0;
 		
 		do {
-			type = in.nextInt();
 			msg = in.nextLine();
+			type = in.nextInt();
 		} while (msg.isEmpty());
 		
-		/* no error handling. relying on programmer. */
-		return new Message(type, msg);
 		
 	}
 }

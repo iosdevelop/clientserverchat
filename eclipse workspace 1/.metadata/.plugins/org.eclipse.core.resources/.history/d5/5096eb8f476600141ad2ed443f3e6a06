@@ -114,7 +114,6 @@ public class Client extends Thread {
 						break;
 					default:
 						output.display(message);
-						sendMessage(message);
 						break;
 				}
 			}

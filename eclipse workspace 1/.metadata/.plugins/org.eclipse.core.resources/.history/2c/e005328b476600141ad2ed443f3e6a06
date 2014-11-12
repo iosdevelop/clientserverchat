@@ -109,12 +109,10 @@ public class Client extends Thread {
 					case Message.LOGIN:
 						System.out.println("LOGIN");
 						username = message.name();
-						//output.display(message);
-						sendMessage(message);
+						output.display(message);
 						break;
 					default:
 						output.display(message);
-						sendMessage(message);
 						break;
 				}
 			}

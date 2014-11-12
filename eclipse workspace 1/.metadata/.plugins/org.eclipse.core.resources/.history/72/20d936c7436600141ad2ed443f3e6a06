@@ -100,21 +100,18 @@ public class Client extends Thread {
 			while (clientIsRunning && !socket.isClosed()) {
 				
 				/* Commented out for now. It's trying to read from a socket that isn't working yet. */
-				Message message = (Message) inputStream.readObject();
+				//Message message = (Message) inputStream.readObject();
 				
-				//Message message = CLI_Driver.getText(); // Temporary.
+				Message message = CLI_Driver.getText(); // Temporary.
 				
 				/* All cases except for login just display it. */
 				switch(message.type()) {
 					case Message.LOGIN:
-						System.out.println("LOGIN");
 						username = message.name();
-						//output.display(message);
-						sendMessage(message);
+						output.display(message);
 						break;
 					default:
 						output.display(message);
-						sendMessage(message);
 						break;
 				}
 			}

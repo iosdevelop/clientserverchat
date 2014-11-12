@@ -19,7 +19,6 @@ public class CLI_Driver {
 			msg = in.nextLine();
 		} while (msg.isEmpty());
 		
-		/* no error handling. relying on programmer. */
 		return new Message(type, msg);
 		
 	}
