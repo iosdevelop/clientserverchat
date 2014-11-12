@@ -1,57 +1,48 @@
 package client;
 
-import java.awt.EventQueue;
-import java.io.IOException;
-import java.net.ConnectException;
-import java.net.UnknownHostException;
-
-import javax.swing.JFrame;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
 
 public class GUI_Application_Main {
 
-	private JFrame frame;
+	protected Shell shell;
 
 	/**
 	 * Launch the application.
+	 * @param args
 	 */
 	public static void main(String[] args) {
-
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GUI_Application_Main window = new GUI_Application_Main();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public GUI_Application_Main() {
-		initialize();
-		Client cli = new Client("127.0.0.1", 200, "Adam");
 		try {
-			cli.connect();
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			System.out.println("Connect exception");
+			GUI_Application_Main window = new GUI_Application_Main();
+			window.open();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		cli.run();
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Open the window.
 	 */
-	private void initialize() {
-		frame = new JFrame("Client");
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public void open() {
+		Display display = Display.getDefault();
+		createContents();
+		shell.open();
+		shell.layout();
+		while (!shell.isDisposed()) {
+			if (!display.readAndDispatch()) {
+				display.sleep();
+			}
+		}
+	}
+
+	/**
+	 * Create contents of the window.
+	 */
+	protected void createContents() {
+		shell = new Shell();
+		shell.setSize(450, 300);
+		shell.setText("SWT Application");
+
 	}
 
 }

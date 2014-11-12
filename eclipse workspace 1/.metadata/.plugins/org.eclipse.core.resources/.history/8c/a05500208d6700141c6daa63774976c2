@@ -1,0 +1,122 @@
+package server;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.factories.FormFactory;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class GUI_Application_Main extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textFieldPort;
+	private JTextField textFieldMaxUsers;
+	
+	private String usersFile;
+	private String roomsFile;
+	
+	private Server the_server;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					GUI_Application_Main frame = new GUI_Application_Main();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public GUI_Application_Main() {
+		
+		// this is where we initialize things
+		
+		the_server = Server.getInstance();
+		
+		// this is the code that creates the GUI interface
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(new FormLayout(new ColumnSpec[] {
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,},
+			new RowSpec[] {
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,}));
+		
+		JLabel lblPort = new JLabel("Port:");
+		contentPane.add(lblPort, "2, 2, right, default");
+		
+		textFieldPort = new JTextField();
+		contentPane.add(textFieldPort, "4, 2");
+		textFieldPort.setColumns(10);
+		
+		JButton btnSelectUsersFile = new JButton("Select Users File");
+		btnSelectUsersFile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				// this is called when the user clicks the select users file button
+				
+			}
+		});
+		contentPane.add(btnSelectUsersFile, "6, 2");
+		
+		JLabel lblMaxUsers = new JLabel("Max Users:");
+		contentPane.add(lblMaxUsers, "2, 4, right, default");
+		
+		textFieldMaxUsers = new JTextField();
+		contentPane.add(textFieldMaxUsers, "4, 4");
+		textFieldMaxUsers.setColumns(10);
+		
+		JButton btnSelectRoomsFile = new JButton("Select Rooms File");
+		btnSelectRoomsFile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				// this is called when the user clicks the select rooms file
+			}
+		});
+		contentPane.add(btnSelectRoomsFile, "6, 4");
+		
+		JButton btnStartStop = new JButton("Start Server");
+		btnStartStop.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				// this is called when the user clicks the start/stop button.
+				// check the text on the button to determine the proper action to take
+				// update the text on the button when done
+			}
+		});
+		contentPane.add(btnStartStop, "6, 6");
+	}
+
+}
