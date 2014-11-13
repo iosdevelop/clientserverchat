@@ -8,12 +8,19 @@ public class CLI_Driver {
 	}
 	
 	public static Message getText() {
+		
 		Scanner in = new Scanner(System.in);
-		System.out.print("Waiting for message input: ");
+		System.out.print("Waiting for message input (integer_type then message): ");
 		String msg = null;
+		int type = 0;
+		
 		do {
+			type = in.nextInt();
 			msg = in.nextLine();
 		} while (msg.isEmpty());
-		return new Message(Message.SAY, msg);
+		
+		/* no error handling. relying on programmer. */
+		return new Message(type, msg);
+		
 	}
 }

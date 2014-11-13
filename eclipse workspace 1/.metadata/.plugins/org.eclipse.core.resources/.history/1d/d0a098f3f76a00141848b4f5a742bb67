@@ -1,0 +1,88 @@
+package client;
+
+
+import javax.swing.JOptionPane;
+
+import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.dialogs.IDialogConstants;
+import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.widgets.Label;
+
+
+public class SWTServerInputDialog extends Dialog {
+	
+	
+	private Text textIPAddr;
+	private Text textPort;
+	
+	private String IPAddr;
+	private int port;
+
+
+	/* Creat the dialog. */
+	/* @Param: parentShell */
+	public SWTServerInputDialog(Shell parentShell) {
+		super(parentShell);
+	}
+
+	
+	/* Create contents of the dialog. */
+	/* @Param: parent */
+	@Override
+	protected Control createDialogArea(Composite parent) {
+		Composite container = (Composite) super.createDialogArea(parent);
+		container.setLayout(null);
+		
+		textIPAddr = new Text(container, SWT.BORDER);
+		textIPAddr.setBounds(69, 10, 150, 21);
+		
+		textPort = new Text(container, SWT.BORDER);
+		textPort.setBounds(69, 37, 150, 21);
+		
+		Label lblIpAddr = new Label(container, SWT.NONE);
+		lblIpAddr.setBounds(8, 16, 55, 15);
+		lblIpAddr.setText("IP Addr:");
+		
+		Label lblPort = new Label(container, SWT.NONE);
+		lblPort.setBounds(8, 43, 55, 15);
+		lblPort.setText("Port:");
+
+		return container;
+	}
+
+	
+	/* Create contents of the button bar. */
+	/* @param parent */	
+	@Override
+	protected void createButtonsForButtonBar(Composite parent) {
+		createButton(parent, IDialogConstants.OK_ID, "Ok", true);
+		createBUtton();
+		Button button = createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL,
+				true);
+		createButton(parent, IDialogConstants.CANCEL_ID,
+				IDialogConstants.CANCEL_LABEL, false);
+	}
+
+	
+	/* Return the initial size of the dialog. */
+	@Override
+	protected Point getInitialSize() {
+		return new Point(235, 140);
+	}
+	
+	public String getIP() {
+		return IPAddr;
+	}
+	
+	public int getPort() {
+		return port;
+	}
+}

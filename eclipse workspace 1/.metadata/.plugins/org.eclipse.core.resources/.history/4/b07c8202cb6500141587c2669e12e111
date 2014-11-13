@@ -1,0 +1,28 @@
+package shared;
+
+import java.util.Scanner;
+
+public class CLI_Driver {
+	public static void display(Message msg) {
+		System.out.println(msg.toString());
+	}
+	
+	public static Message getText() {
+		
+		Scanner in = new Scanner(System.in);
+		System.out.print("Waiting for message input: ");
+		String msg = null;
+		
+		do {
+			msg = in.nextLine();
+		} while (msg.isEmpty());
+		
+		int type = 0;
+		if (msg.length() >= 2) {
+			try { type = Integer.parseInt(msg.substring(0, 1)); }
+			catch (NumberFormatException exc) { type = 0; };
+		}
+		
+		return new Message(Message.SAY, msg);
+	}
+}

@@ -22,12 +22,12 @@ public class Message implements Serializable {
 							SAY = 8,		// Send public chat to a room
 							SUCCESS = 9,	// Previous message succeeded
 							WHOISIN = 10,	// Get user list in a room
-							LIST = 11,		// Lst users in a room
+							LIST = 11,		// List users in a room
 							KICK = 12,		// Kick user from room (mod/admin)
 							BAN = 13,		// Ban user from room (mod/adm)
-							UNBAN = 14,		// unban a user from a room (mod/adm)
-							OP = 15,		// promote a user to "mod" status
-							DEOP = 16,		// demote a user from mod status
+							UNBAN = 14,		// Unban a user from a room (mod/adm)
+							OP = 15,		// Promote a user to "mod" status
+							DEOP = 16,		// emote a user from mod status
 							TOPIC = 17,		// Set the chat room's topic
 							RINFO = 18,		// Get information about the room
 							UINFO = 19;		// Get a whois on the user

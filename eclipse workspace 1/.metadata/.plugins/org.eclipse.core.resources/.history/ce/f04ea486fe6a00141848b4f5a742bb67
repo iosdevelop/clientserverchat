@@ -1,0 +1,163 @@
+/*
+ * 
+ * SWTServerInputDialog.java
+ * 
+ * This class details a callable custom SWT dialog.
+ * The dialog will provide two text fields for an IP Address and a port number
+ * called in client/GUI_Application_Main.java.
+ * 
+ */
+
+package client;
+
+
+import javax.swing.JOptionPane;
+
+import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.dialogs.IDialogConstants;
+import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Label;
+
+
+public class SWTServerInputDialog extends Dialog {
+	
+	/* Constants to indicate failure states to external entities. */
+	public final int INVALID_PORT = -100;
+	public final int INVALID_USER = -101;
+	public final int INVALID_IP   = -102;
+	
+	
+	private Text textIPAddr;
+	private Text textPort;
+	private Text textUser;
+	
+	/* Variables to hold the results of the above two Text objects. */
+	private String IPAddr;
+	private int port;
+	private String username;
+	
+	private Label lblUsername; // dunno why i put it here heh
+
+	
+	/* Creat the dialog. */
+	/* @Param: parentShell */
+	public SWTServerInputDialog(Shell parentShell) {
+		super(parentShell);
+	}
+
+	
+	/* Create contents of the dialog. */
+	/* @Param: parent */
+	@Override
+	protected Control createDialogArea(Composite parent) {
+		Composite container = (Composite) super.createDialogArea(parent);
+		container.setLayout(null);
+		
+		textIPAddr = new Text(container, SWT.BORDER);
+		textIPAddr.setBounds(69, 10, 150, 21);
+		
+		textPort = new Text(container, SWT.BORDER);
+		textPort.setBounds(69, 37, 150, 21);
+		
+		Label lblIpAddr = new Label(container, SWT.NONE);
+		lblIpAddr.setBounds(8, 16, 55, 15);
+		lblIpAddr.setText("IP Addr:");
+		
+		Label lblPort = new Label(container, SWT.NONE);
+		lblPort.setBounds(8, 43, 55, 15);
+		lblPort.setText("Port:");
+		
+		textUser = new Text(container, SWT.BORDER);
+		textUser.setBounds(69, 64, 150, 21);
+		
+		lblUsername = new Label(container, SWT.NONE);
+		lblUsername.setBounds(8, 67, 55, 15);
+		lblUsername.setText("Username:");
+
+		return container;
+	}
+
+	
+	/* Create contents of the button bar. */
+	/* @param parent */	
+	@Override
+	protected void createButtonsForButtonBar(Composite parent) {
+		createButton(parent, IDialogConstants.OK_ID, "Ok", true);
+		createButton(parent, IDialogConstants.CANCEL_ID, IDialogConstants.CANCEL_LABEL, false);
+	}
+
+	
+	/* Override for okPressed. Handles what happens when the user hits ok. */
+	@Override
+	protected void okPressed() {
+	    /* Copy data from SWT widgets into fields on button press.
+	       Reading data from the widgets later will cause an SWT
+	       widget diposed exception. */
+		IPAddr = textIPAddr.getText();
+		username = textUser.getText();
+		
+		try {
+			port = Integer.parseInt(textPort.getText());
+		} catch (NumberFormatException exc) {
+			JOptionPane.showMessageDialog(null, "Error",
+					"Error: Invalid port. Must be integer."
+					, JOptionPane.ERROR_MESSAGE
+			);
+			port = INVALID_PORT;
+		}
+		
+		
+		/* Error check the IP and username. These are strings with integer
+		 * error codes. The way we will do this is just by appending a null
+		 * string to make it a string because Java is awesome like that.
+		 * In GUIAPPMAIN we'll have to check it like that, too. I'll make
+		 * a note there later probably.
+		 */
+		if (username.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Error",
+					"Error: Username field is empty."
+					, JOptionPane.ERROR_MESSAGE
+			);
+			username = INVALID_USER+"";
+		}
+		
+		if (IPAddr.isEmpty()) {
+			JOptionPane.showMessageDialog(null, 
+					"Error: IP field is empty.", "Error",
+					, JOptionPane.ERROR_MESSAGE
+			);
+			IPAddr = INVALID_IP+"";
+		}
+		
+		super.okPressed();
+	}
+	
+	
+	/* Return the initial size of the dialog. */
+	@Override
+	protected Point getInitialSize() {
+		return new Point(235, 178);
+	}
+	
+	
+	/* A couple of getters and setters so that GUI_Application_Main can
+	 * actually read the data we collect. */
+	public String getIP() {
+		return IPAddr;
+	}
+	
+	
+	public int getPort() {
+		return port;
+	}
+	
+	
+	public String getUser() {
+		return username;
+	}
+}

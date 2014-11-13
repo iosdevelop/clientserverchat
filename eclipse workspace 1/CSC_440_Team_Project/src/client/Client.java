@@ -1,14 +1,10 @@
 package client;
 
-import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.Scanner;
-
-import shared.CLI_Driver;
 import shared.Message;
 
 public class Client extends Thread {
@@ -97,21 +93,24 @@ public class Client extends Thread {
 			output.display("Waiting for messages...");
 			clientIsRunning = true;
 			
-			while (clientIsRunning /*&& !socket.isClosed()*/) {
+			while (clientIsRunning && !socket.isClosed()) {
 				
 				/* Commented out for now. It's trying to read from a socket that isn't working yet. */
-				//Message message = (Message) inputStream.readObject();
+				Message message = (Message) inputStream.readObject();
 				
-				Message message = CLI_Driver.getText(); // Temporary.
+				//Message message = CLI_Driver.getText(); // Temporary.
 				
 				/* All cases except for login just display it. */
 				switch(message.type()) {
 					case Message.LOGIN:
+						System.out.println("LOGIN");
 						username = message.name();
-						output.display(message);
+						//output.display(message);
+						sendMessage(message);
 						break;
 					default:
 						output.display(message);
+						sendMessage(message);
 						break;
 				}
 			}
