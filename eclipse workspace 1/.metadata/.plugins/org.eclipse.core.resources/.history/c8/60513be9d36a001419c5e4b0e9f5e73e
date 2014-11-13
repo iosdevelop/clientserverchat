@@ -1,7 +1,5 @@
 package client;
 
-import java.io.IOException;
-
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
@@ -96,27 +94,14 @@ public class GUI_Application_Main {
 	}
 	
 	
-	/* Event handler function for the connect button. */
+	/* Wrapper for the connect button event handler from createContents(). */
+	/* 
 	private static void connectButtonClicked() {
 		
 		/* Show the server information gathering dialog. */
 		int returnCode = serverInputDialog.showDialog();
 		if (returnCode == ServerInputDialog.CANCEL_OPTION) {
 			return;
-		}
-		
-		System.out.println("made it here");
-		
-		/* temp. will add dialog or something for this later. */
-		String username = "shrek";
-		
-		/* Now actually try to connect. */
-		client = new Client(serverInputDialog.getIP(), serverInputDialog.getPort(), username);
-		try {
-			client.connect();
-			client.run();
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 		
 	}

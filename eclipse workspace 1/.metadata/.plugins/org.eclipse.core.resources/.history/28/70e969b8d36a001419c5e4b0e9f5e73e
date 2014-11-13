@@ -1,7 +1,5 @@
 package client;
 
-import java.io.IOException;
-
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
@@ -15,17 +13,12 @@ import org.eclipse.swt.events.SelectionEvent;
 public class GUI_Application_Main {
 
 	
-	/* ------------Class vars------------------*/
-	
 	private static Client client;
 	private static ServerInputDialog serverInputDialog;
 	
 	protected static Shell shlSwtClient;
 	private Text text;
 
-	
-	/* -----------------------------------------*/
-	
 	
 	/* Launch the application. Create main window and open it. */
 	public static void main(String[] args) {
@@ -96,7 +89,7 @@ public class GUI_Application_Main {
 	}
 	
 	
-	/* Event handler function for the connect button. */
+	/* Wrapper for the connect button event from createContents(). */ 
 	private static void connectButtonClicked() {
 		
 		/* Show the server information gathering dialog. */
@@ -105,19 +98,7 @@ public class GUI_Application_Main {
 			return;
 		}
 		
-		System.out.println("made it here");
 		
-		/* temp. will add dialog or something for this later. */
-		String username = "shrek";
-		
-		/* Now actually try to connect. */
-		client = new Client(serverInputDialog.getIP(), serverInputDialog.getPort(), username);
-		try {
-			client.connect();
-			client.run();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		
 	}
 	

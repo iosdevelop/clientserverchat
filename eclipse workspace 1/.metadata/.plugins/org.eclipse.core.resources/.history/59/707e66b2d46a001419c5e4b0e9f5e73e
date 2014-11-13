@@ -105,8 +105,6 @@ public class GUI_Application_Main {
 			return;
 		}
 		
-		System.out.println("made it here");
-		
 		/* temp. will add dialog or something for this later. */
 		String username = "shrek";
 		
