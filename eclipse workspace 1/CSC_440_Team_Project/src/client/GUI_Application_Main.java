@@ -2,6 +2,10 @@ package client;
 
 import java.io.IOException;
 
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
@@ -18,7 +22,7 @@ public class GUI_Application_Main {
 	/* ------------Class vars------------------*/
 	
 	private static Client client;
-	private static ServerInputDialog serverInputDialog;
+	private static SWTServerInputDialog serverInputDialog;
 	
 	protected static Shell shlSwtClient;
 	private Text text;
@@ -29,11 +33,28 @@ public class GUI_Application_Main {
 	
 	/* Launch the application. Create main window and open it. */
 	public static void main(String[] args) {
+		
+		/* Make it look like a native Linux/OS X/Windows application. */
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException | InstantiationException
+				| IllegalAccessException | UnsupportedLookAndFeelException exc) {
+			/* The user (probably) won't know there was an issue. Java will
+			 * default to the standard swing look and feel. It's ugly, but
+			 * it works and runs. We'll just print an error to let them
+			 * know something went wrong.
+			 */
+			System.err.println("Error: Error setting system look and feel.");
+			System.err.println("	Using to Java default...");
+		}
+		
+		/* Entry point o fthe application. */
 		try {
 			GUI_Application_Main window = new GUI_Application_Main();
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.exit(-1);
 		}
 	}
 
@@ -81,7 +102,7 @@ public class GUI_Application_Main {
 		btnSend.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				System.out.println("Send");
+				sendMessageButtonClicked();
 			}
 		});
 		btnSend.setBounds(336, 226, 75, 25);
@@ -91,27 +112,39 @@ public class GUI_Application_Main {
 		lblNotFinalDesign.setBounds(330, 67, 104, 74);
 		lblNotFinalDesign.setText("NOT FINAL DESIGN");
 
-		serverInputDialog = new ServerInputDialog();
+		serverInputDialog = new SWTServerInputDialog(shlSwtClient);
 		
 	}
 	
 	
 	/* Event handler function for the connect button. */
 	private static void connectButtonClicked() {
-		
+
+		serverInputDialog.open();
 		/* Show the server information gathering dialog. */
-		int returnCode = serverInputDialog.showDialog();
-		if (returnCode == ServerInputDialog.CANCEL_OPTION) {
+		int returnCode = serverInputDialog.getReturnCode();
+		if (returnCode == SWTServerInputDialog.CANCEL) {
 			return;
 		}
 		
-		System.out.println("made it here");
+		/* Now actually try to connect. */ 
+		String ip = serverInputDialog.getIP();
+		int port = serverInputDialog.getPort();
+		String username = serverInputDialog.getUser();
 		
-		/* temp. will add dialog or something for this later. */
-		String username = "shrek";
+		if (port == serverInputDialog.INVALID_PORT)
+			return;
 		
-		/* Now actually try to connect. */
-		client = new Client(serverInputDialog.getIP(), serverInputDialog.getPort(), username);
+		/* For these two, we have to append a null string to check right.
+		 * Look at the comments in SWTServerInputDialog for further explan.
+		 */
+		if (username.equals(serverInputDialog.INVALID_USER+""))
+			return;
+		
+		if (ip.equals(serverInputDialog.INVALID_IP+""))
+			return;
+		
+		client = new Client(ip, port, username);
 		try {
 			client.connect();
 			client.run();
@@ -121,8 +154,9 @@ public class GUI_Application_Main {
 		
 	}
 	
+	
 	/* Event handler for the send button. */
 	private static void sendMessageButtonClicked() {
-		
+		JOptionPane.showMessageDialog(null, "not working yet bro.", "im a title", JOptionPane.INFORMATION_MESSAGE);
 	}
 }

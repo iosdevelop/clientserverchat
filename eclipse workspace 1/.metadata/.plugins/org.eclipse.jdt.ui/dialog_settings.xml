@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-	<item value="C:\Users\The Adaminator\Dropbox\CSC 440 Team Project\eclipse-standard-luna-R-win32-x86_64\eclipse\plugins\org.eclipse.wb.swing.FormLayout.lib_1.7.0.r44x201405021531" key="org.eclipse.jdt.ui.lastextjar"/>
+	<item value="C:\Users\The Adaminator\Dropbox\CSC 440 Team Project\eclipse-standard-luna-R-win32-x86_64\eclipse\plugins" key="org.eclipse.jdt.ui.lastextjar"/>
 	<section name="org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart">
 		<item value="2" key="layout"/>
 		<item value="true" key="group_libraries"/>
@@ -17,6 +17,8 @@
 	<section name="quick_assist_proposal_size">
 	</section>
 	<section name="completion_proposal_size">
+		<item value="252" key="size.y"/>
+		<item value="735" key="size.x"/>
 	</section>
 	<section name="JavaElementSearchActions">
 	</section>
