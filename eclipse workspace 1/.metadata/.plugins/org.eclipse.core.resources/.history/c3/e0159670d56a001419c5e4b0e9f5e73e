@@ -121,7 +121,6 @@ public class GUI_Application_Main {
 		
 	}
 	
-	/* Event handler for the send button. */
 	private static void sendMessageButtonClicked() {
 		
 	}

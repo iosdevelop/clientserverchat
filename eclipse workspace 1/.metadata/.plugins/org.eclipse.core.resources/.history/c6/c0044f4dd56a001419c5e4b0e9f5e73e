@@ -1,5 +1,4 @@
 /*
- * 
  * ServerInputDialog.java
  * 
  * Defines a simple dialog to grab an IP address and a Port from the user.
@@ -35,8 +34,6 @@ class ServerInputDialog {
 	}
 	
 	
-	/* Show the dialog with JOptionPane and set new values accordingly. */
-	/* Return: Option chosen on the dialog */
 	public int showDialog() {
 		int value = JOptionPane.showConfirmDialog(
 				null,
@@ -63,7 +60,6 @@ class ServerInputDialog {
 	}
 	
 	
-	/* getters/setters */
 	public String getIP() {
 		return currentIP;
 	}
