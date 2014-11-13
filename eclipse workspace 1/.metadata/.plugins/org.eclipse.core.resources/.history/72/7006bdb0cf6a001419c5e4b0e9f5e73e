@@ -1,0 +1,57 @@
+import java.net.Inet4Address;
+
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+
+class ServerInputDialog {
+	
+	JPanel panel;
+	JTextField txtIP, txtPort;
+	int currentPort;
+	Inet4Address currentIP;
+	
+	public ServerInputDialog() {
+		panel = new JPanel();
+		txtIP = new JTextField(15);
+		txtPort = new JTextField(10);
+		panel.add(txtIP);
+		panel.add(txtPort);
+	}
+	
+	public void showDialog() {
+		int value = JOptionPane.showConfirmDialog(
+				null,
+				panel,
+				"Enter text",
+				JOptionPane.OK_CANCEL_OPTION
+		);
+		
+		if (value == JOptionPane.OK_OPTION) {
+			
+			/* Be sure inputs are clean. */
+			try {
+				setIP(String.txtIP.getText())
+			}
+			
+		}
+		
+	}
+	
+	public Inet4Address getIP() {
+		return currentIP;
+	}
+	
+	public int getPort() {
+		return currentPort;
+	}
+	
+	public void setIP(Inet4Address IP) {
+		currentIP = IP;
+	}
+	
+	public void setPort(int port) {
+		currentPort = port;
+	}
+}

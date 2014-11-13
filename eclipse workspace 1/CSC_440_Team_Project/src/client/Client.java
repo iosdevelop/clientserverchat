@@ -1,14 +1,10 @@
 package client;
 
-import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.Scanner;
-
-import shared.CLI_Driver;
 import shared.Message;
 
 public class Client extends Thread {

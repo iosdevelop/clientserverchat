@@ -4,16 +4,23 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 
 public class GUI_Application_Main {
 
-	protected Shell shlSwtClient;
-	private Text txtIAmA;
+	
+	private static Client client;
+	private static ServerInputDialog serverInputDialog;
+	
+	protected static Shell shlSwtClient;
+	private Text text;
 
-	/**
-	 * Launch the application.
-	 * @param args
-	 */
+	
+	/* Launch the application. Create main window and open it. */
 	public static void main(String[] args) {
 		try {
 			GUI_Application_Main window = new GUI_Application_Main();
@@ -23,9 +30,8 @@ public class GUI_Application_Main {
 		}
 	}
 
-	/**
-	 * Open the window.
-	 */
+	
+	/* Actually open the window and display it to the user. Handle closing. */
 	public void open() {
 		Display display = Display.getDefault();
 		createContents();
@@ -38,18 +44,65 @@ public class GUI_Application_Main {
 		}
 	}
 
-	/**
-	 * Create contents of the window.
-	 */
+	
+	/* Draw window contents. */
 	protected void createContents() {
+		
 		shlSwtClient = new Shell();
 		shlSwtClient.setSize(450, 300);
 		shlSwtClient.setText("SWT Client");
 		shlSwtClient.setLayout(null);
 		
-		txtIAmA = new Text(shlSwtClient, SWT.BORDER);
-		txtIAmA.setText("i am a box");
-		txtIAmA.setBounds(63, 42, 76, 21);
+		StyledText styledText = new StyledText(shlSwtClient, SWT.BORDER);
+		styledText.setEditable(false);
+		styledText.setBounds(10, 10, 314, 214);
+		
+		Button btnConnect = new Button(shlSwtClient, SWT.NONE);
+		btnConnect.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				connectButtonClicked();
+			}
+		});
+		btnConnect.setBounds(349, 10, 75, 25);
+		btnConnect.setText("Connect");
+		
+		text = new Text(shlSwtClient, SWT.BORDER);
+		text.setBounds(10, 230, 314, 21);
+		
+		final Button btnSend = new Button(shlSwtClient, SWT.NONE);
+		btnSend.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				System.out.println("Send");
+			}
+		});
+		btnSend.setBounds(336, 226, 75, 25);
+		btnSend.setText("Send");
+		
+		Label lblNotFinalDesign = new Label(shlSwtClient, SWT.NONE);
+		lblNotFinalDesign.setBounds(330, 67, 104, 74);
+		lblNotFinalDesign.setText("NOT FINAL DESIGN");
 
+		serverInputDialog = new ServerInputDialog();
+		
+	}
+	
+	
+	/* Wrapper for the connect button event from createContents(). */ 
+	private static void connectButtonClicked() {
+		
+		/* Show the server information gathering dialog. */
+		int returnCode = serverInputDialog.showDialog();
+		if (returnCode == ServerInputDialog.CANCEL_OPTION) {
+			return;
+		}
+		
+		
+		
+	}
+	
+	private static void sendMessageButtonClicked() {
+		
 	}
 }

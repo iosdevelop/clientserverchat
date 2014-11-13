@@ -1,0 +1,16 @@
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+
+class ServerInputDialog {
+	
+		JPanel panel = new JPanel();
+		JTextField txtIP = new JTextField(15);
+		JTextField txtPort = new JTextField(10);
+		panel.add(txtIP);
+		panel.add(txtPort);
+		int value = JOptionPane.showConfirmDialog(null, panel, "Enter text", JOptionPane.OK_CANCEL_OPTION);
+		return value;
+
+}
